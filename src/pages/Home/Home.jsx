@@ -1,57 +1,64 @@
-import React from "react";
+import React, { memo } from "react";
 
 // Page & Section Components
 import PageTitle from "../reusable/PageTitle";
 import HeroSlider from "./heroBanner.jsx/HeroSlider";
-import Products_Curtains from "./Products_Curtains";
-import Products_Blackout from "./Products_Blackout";
+import ProductsCurtains from "./Products_Curtains";
+import ProductsBlackout from "./Products_Blackout";
 import WhyChoose from "./WhyChoose";
 import OurClient from "./OurClient";
 import CustomerReviews from "./CustomerReviews";
-import SubscreibeContact from "../contact/SubscreibeContact";
+import SubscribeContact from "../contact/SubscreibeContact";
 
 const Home = () => {
   return (
-    <div className="home-page">
+    <>
       {/* SEO Title */}
       <PageTitle title="Curtains Furniture | Home" />
 
       {/* Hero Section */}
-      <section className="hero-slider">
+      <section>
         <HeroSlider />
       </section>
 
       {/* Curtains Collection */}
-      <section className="products-curtains my-16">
-        <Products_Curtains />
-      </section>
+      <SectionWrapper>
+        <ProductsCurtains />
+      </SectionWrapper>
 
-      {/* Blackout Curtains Showcase */}
-      <section className="products-blackout my-16">
-        <Products_Blackout />
-      </section>
+      {/* Blackout Curtains */}
+      <SectionWrapper>
+        <ProductsBlackout />
+      </SectionWrapper>
 
       {/* Why Choose Us */}
-      <section className="why-choose-us my-16">
+      <SectionWrapper>
         <WhyChoose />
-      </section>
+      </SectionWrapper>
 
       {/* Our Clients */}
-      <section className="our-clients my-16">
+      <SectionWrapper>
         <OurClient />
-      </section>
+      </SectionWrapper>
 
       {/* Customer Reviews */}
-      <section className="customer-reviews my-16">
+      <SectionWrapper>
         <CustomerReviews />
-      </section>
+      </SectionWrapper>
 
-      {/* Subscription / Contact Section */}
-      <section className="subscribe-contact my-16">
-        <SubscreibeContact />
-      </section>
-    </div>
+      {/* Newsletter / Contact */}
+      <SectionWrapper>
+        <SubscribeContact />
+      </SectionWrapper>
+    </>
   );
 };
 
-export default Home;
+/**
+ * Reusable Section Wrapper for consistent spacing and structure
+ */
+const SectionWrapper = memo(({ children }) => {
+  return <section className="my-16 w-full">{children}</section>;
+});
+
+export default memo(Home);
