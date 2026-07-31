@@ -1,53 +1,50 @@
-// NOTE: This scroll to top is the actual working scroll to to when user clicks on the circle arrow that appears when use scrolls down.
-// The other `ScrollToTop` component in components folder is for the default react scroll to top behavior on route visit.
+// Scroll-to-top button with Ehan Tech corporate styling
+// Appears when user scrolls down, smooth scrolls to top on click
 
-import { useState, useEffect } from 'react';
-import { FiChevronUp } from 'react-icons/fi';
+import { useState, useEffect } from "react";
+import { FiChevronUp } from "react-icons/fi";
 
 const useScrollToTop = () => {
-	const [showScroll, setShowScroll] = useState(false);
+  const [showScroll, setShowScroll] = useState(false);
 
-	useEffect(() => {
-		window.addEventListener('scroll', scrollToTop);
-		return function cleanup() {
-			window.removeEventListener('scroll', scrollToTop);
-		};
-	});
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 400) {
+        setShowScroll(true);
+      } else {
+        setShowScroll(false);
+      }
+    };
 
-	const scrollToTop = () => {
-		if (!showScroll && window.pageYOffset > 400) {
-			setShowScroll(true);
-		} else if (showScroll && window.pageYOffset <= 400) {
-			setShowScroll(false);
-		}
-	};
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-	const backToTop = () => {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth',
-		});
-	};
+  const backToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-	window.addEventListener('scroll', scrollToTop);
-
-	return (
-		<>
-			<FiChevronUp
-				className="scrollToTop"
-				onClick={backToTop}
-				style={{
-					height: 45,
-					width: 45,
-					borderRadius: 50,
-					right: 50,
-					bottom: 50,
-					display: showScroll ? 'flex' : 'none',
-					padding: 5,
-				}}
-			/>
-		</>
-	);
+  return (
+    <button
+      onClick={backToTop}
+      aria-label="Scroll to top"
+      className="fixed z-50 flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl"
+      style={{
+        height: 48,
+        width: 48,
+        borderRadius: 14,
+        right: 30,
+        bottom: 30,
+        display: showScroll ? "flex" : "none",
+        backgroundColor: "#8A1538",
+        color: "white",
+        border: "none",
+        cursor: "pointer",
+      }}
+    >
+      <FiChevronUp size={24} strokeWidth={3} />
+    </button>
+  );
 };
 
 export default useScrollToTop;

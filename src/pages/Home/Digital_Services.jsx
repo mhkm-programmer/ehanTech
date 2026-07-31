@@ -8,6 +8,14 @@ import {
   FaStar,
   FaStarHalfAlt,
   FaRegStar,
+  FaGlobe,
+  FaChartLine,
+  FaSearchDollar,
+  FaBullhorn,
+  FaCode,
+  FaPalette,
+  FaMobileAlt,
+  FaPenFancy,
 } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
@@ -15,63 +23,103 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import Modal from "react-modal";
 
-// Modal accessibility root
 Modal.setAppElement("#root");
 
-const products = [
+const services = [
   {
     id: 1,
-    name: "Blackout Blinds",
-    subtitle: "Blocks 100% sunlight – perfect for bedrooms and media rooms.",
-    image: "https://8upload.com/image/685c9a9757638/IMG-20250625-WA0039.jpg",
-    link: "/curtains/blackout",
-    discount: true,
-    rating: 4.5,
+    name: "Website Development",
+    subtitle: "Custom business websites, e-commerce, and web portals built with modern technology.",
+    icon: <FaCode size={40} />,
+    gradient: "from-[#8A1538] to-[#5a0e24]",
+    link: "/website-development-qatar",
+    rating: 5,
+    badge: "Most Requested",
   },
   {
     id: 2,
-    name: "Bedroom Blinds",
-    subtitle: "Soft blackout fabric with a cozy, relaxing aesthetic.",
-    image: "https://8upload.com/image/685c9a9817093/IMG-20250625-WA0047.jpg",
-    link: "/curtains/bedroom",
-    discount: false,
-    rating: 4.0,
+    name: "Digital Marketing",
+    subtitle: "Full-funnel digital marketing — social media, Google Ads, email & content strategy.",
+    icon: <FaBullhorn size={40} />,
+    gradient: "from-[#0b0c10] to-gray-800",
+    link: "/digital-marketing-qatar",
+    rating: 4.5,
+    badge: "Popular",
   },
   {
     id: 3,
-    name: "Window Blinds",
-    subtitle: "Modern blackout waves for clean, sleek interiors.",
-    image: "https://8upload.com/image/685c9a9765f0a/IMG-20250625-WA0040.jpg",
-    link: "/curtains/wave",
-    discount: true,
-    rating: 4.7,
+    name: "SEO Services",
+    subtitle: "Search engine optimization to rank higher on Google and drive organic traffic.",
+    icon: <FaSearchDollar size={40} />,
+    gradient: "from-[#8A1538] to-[#5a0e24]",
+    link: "/seo-services-qatar",
+    rating: 5,
   },
   {
     id: 4,
-    name: "Office Blinds",
-    subtitle: "Elegant blackout solutions for privacy and ambiance.",
-    image: "https://8upload.com/image/685c9a97d9c22/IMG-20250625-WA0045.jpg",
-    link: "/curtains/livingroom",
-    discount: false,
-    rating: 4.3,
+    name: "Online Ads Management",
+    subtitle: "Google, Facebook & Instagram ad campaigns managed for maximum ROI.",
+    icon: <FaChartLine size={40} />,
+    gradient: "from-[#0b0c10] to-gray-800",
+    link: "/online-ads-services-qatar",
+    rating: 4.5,
+    badge: "Trending",
+  },
+  {
+    id: 5,
+    name: "UI/UX Design",
+    subtitle: "User-centered interface and experience design for websites and mobile apps.",
+    icon: <FaPalette size={40} />,
+    gradient: "from-[#8A1538] to-[#5a0e24]",
+    link: "/website-development-qatar",
+    rating: 5,
+    badge: "Premium",
+  },
+  {
+    id: 6,
+    name: "Mobile App Development",
+    subtitle: "iOS & Android app development for businesses, startups, and enterprises.",
+    icon: <FaMobileAlt size={40} />,
+    gradient: "from-[#0b0c10] to-gray-800",
+    link: "/website-development-qatar",
+    rating: 4.5,
+  },
+  {
+    id: 7,
+    name: "Content Writing",
+    subtitle: "Professional copywriting, blog posts, and content for your brand's online presence.",
+    icon: <FaPenFancy size={40} />,
+    gradient: "from-[#8A1538] to-[#5a0e24]",
+    link: "/digital-marketing-qatar",
+    rating: 4.5,
+  },
+  {
+    id: 8,
+    name: "Brand Identity",
+    subtitle: "Logo design, branding guidelines, and visual identity packages for businesses.",
+    icon: <FaGlobe size={40} />,
+    gradient: "from-[#0b0c10] to-gray-800",
+    link: "/digital-marketing-qatar",
+    rating: 5,
+    badge: "New",
   },
 ];
 
 const NextArrow = ({ onClick }) => (
   <div
     onClick={onClick}
-    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 cursor-pointer"
+    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-white border border-gray-200 rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl cursor-pointer transition-all"
   >
-    <FaArrowRight className="text-gray-700" />
+    <FaArrowRight className="text-[#8A1538]" />
   </div>
 );
 
 const PrevArrow = ({ onClick }) => (
   <div
     onClick={onClick}
-    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 cursor-pointer"
+    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-white border border-gray-200 rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl cursor-pointer transition-all"
   >
-    <FaArrowLeft className="text-gray-700" />
+    <FaArrowLeft className="text-[#8A1538]" />
   </div>
 );
 
@@ -81,7 +129,7 @@ const renderStars = (rating) => {
   const empty = 5 - full - (half ? 1 : 0);
 
   return (
-    <div className="flex gap-1 text-yellow-400 text-sm mt-2">
+    <div className="flex gap-1 text-amber-400 text-sm mt-2">
       {[...Array(full)].map((_, i) => <FaStar key={`full-${i}`} />)}
       {half && <FaStarHalfAlt />}
       {[...Array(empty)].map((_, i) => <FaRegStar key={`empty-${i}`} />)}
@@ -91,15 +139,15 @@ const renderStars = (rating) => {
 
 const Digital_Services = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalImage, setModalImage] = useState("");
+  const [modalService, setModalService] = useState(null);
 
-  const openModal = (image) => {
-    setModalImage(image);
+  const openModal = (service) => {
+    setModalService(service);
     setModalOpen(true);
   };
 
   const closeModal = () => {
-    setModalImage("");
+    setModalService(null);
     setModalOpen(false);
   };
 
@@ -123,50 +171,64 @@ const Digital_Services = () => {
   return (
     <section className="relative py-16 px-4 sm:px-6 lg:px-12 bg-gray-50">
       <div className="max-w-screen-xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-4">
-          Our Blackout Curtain Collection
-        </h2>
-        <p className="text-center text-gray-600 mb-12 text-lg max-w-2xl mx-auto">
-          Designed for elegance and maximum light control – ideal for modern homes, offices, and hotel spaces.
-        </p>
+        {/* Title */}
+        <div className="text-center mb-12">
+          <span className="text-[#8A1538] text-xs font-bold uppercase tracking-[0.25em]">Digital Services</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mt-4 mb-4">
+            Digital & <span className="text-[#8A1538]">Marketing</span> Services
+          </h2>
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+            Web development, SEO, digital marketing, branding, and mobile apps to grow your business online — delivered by Ehan Tech's digital division.
+          </p>
+        </div>
 
         <Slider {...settings}>
-          {products.map((product) => (
-            <div key={product.id} className="px-4">
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:-translate-y-1 transition-transform duration-300 relative group">
-                {product.discount && (
-                  <span className="absolute top-4 left-4 bg-red-600 text-white text-xs px-3 py-1 rounded-full font-semibold z-10 shadow">
-                    -20% OFF
+          {services.map((service) => (
+            <div key={service.id} className="px-4">
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:-translate-y-1.5 transition-all duration-300 relative group">
+                {service.badge && (
+                  <span className="absolute top-4 left-4 bg-[#8A1538] text-white text-[10px] px-3 py-1.5 rounded-full font-bold uppercase tracking-wider z-10 shadow-lg">
+                    {service.badge}
                   </span>
                 )}
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  loading="lazy"
-                  onClick={() => openModal(product.image)}
-                  className="w-full h-56 object-cover cursor-pointer group-hover:scale-105 transition-transform duration-300"
-                />
+
+                {/* Icon Area */}
+                <div className={`bg-gradient-to-br ${service.gradient} h-52 flex items-center justify-center relative overflow-hidden`}>
+                  <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,_white_0%,_transparent_60%)]" />
+                  <div className="text-white/90 group-hover:scale-110 transition-transform duration-500">
+                    {service.icon}
+                  </div>
+                  <div
+                    onClick={() => openModal(service)}
+                    className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                  >
+                    <span className="bg-white text-[#8A1538] px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider shadow-lg">
+                      Quick View
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
                 <div className="p-6 flex flex-col h-56 justify-between">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mt-2">{product.subtitle}</p>
-                    {renderStars(product.rating)}
+                    <h3 className="text-xl font-bold text-gray-900">{service.name}</h3>
+                    <p className="text-sm text-gray-500 mt-2">{service.subtitle}</p>
+                    {renderStars(service.rating)}
                   </div>
                   <div className="flex justify-between items-center mt-4 gap-2">
                     <Link
-                      to={product.link}
-                      className="px-5 py-2 text-sm rounded-full font-medium bg-blue-600 text-white hover:bg-blue-700 transition"
+                      to={service.link}
+                      className="flex-1 px-5 py-2.5 text-sm rounded-xl font-bold bg-[#8A1538] text-white hover:bg-[#6b102b] transition-all text-center uppercase tracking-wider"
                     >
-                      View Details
+                      Learn More
                     </Link>
                     <a
-                      href="https://wa.me/97470373588"
+                      href="https://wa.me/97450755702"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2 text-sm rounded-full font-medium bg-green-600 text-white hover:bg-green-700 transition"
+                      className="flex items-center justify-center px-5 py-2.5 text-sm rounded-xl font-bold bg-[#0b0c10] text-white hover:bg-gray-800 transition-all min-w-[48px]"
                     >
-                      <FaWhatsapp className="text-base" />
-                      WhatsApp
+                      <FaWhatsapp size={18} className="text-[#25D366]" />
                     </a>
                   </div>
                 </div>
@@ -175,27 +237,67 @@ const Digital_Services = () => {
           ))}
         </Slider>
 
+        {/* Quick View Modal */}
         <Modal
           isOpen={modalOpen}
           onRequestClose={closeModal}
-          overlayClassName="fixed inset-0 bg-black bg-opacity-70 z-50"
-          className="relative bg-white rounded-xl max-w-3xl mx-auto p-4 shadow-2xl flex items-center justify-center mt-10 outline-none"
+          overlayClassName="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
+          className="relative bg-white rounded-2xl max-w-lg w-full mx-auto shadow-2xl outline-none overflow-hidden"
         >
-          <div className="relative w-full">
-            <button
-              onClick={closeModal}
-              className="absolute top-2 right-2 text-black bg-white rounded-full w-9 h-9 flex items-center justify-center text-lg font-bold shadow hover:bg-gray-200 transition"
-              aria-label="Close"
-            >
-              &times;
-            </button>
-            <img
-              src={modalImage}
-              alt="Curtain Preview"
-              className="w-full h-auto max-h-[80vh] object-contain rounded"
-            />
-          </div>
+          {modalService && (
+            <>
+              <div className={`bg-gradient-to-br ${modalService.gradient} p-8 text-center`}>
+                <div className="text-white mb-4 flex justify-center">{modalService.icon}</div>
+                <h3 className="text-2xl font-bold text-white">{modalService.name}</h3>
+                {modalService.badge && (
+                  <span className="inline-block mt-2 bg-white/20 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                    {modalService.badge}
+                  </span>
+                )}
+              </div>
+              <div className="p-6">
+                <p className="text-gray-600 leading-relaxed mb-6">{modalService.subtitle}</p>
+                <div className="mb-6">{renderStars(modalService.rating)}</div>
+                <div className="flex gap-3">
+                  <Link
+                    to={modalService.link}
+                    onClick={closeModal}
+                    className="flex-1 px-6 py-3 bg-[#8A1538] text-white rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-[#6b102b] transition-all text-center"
+                  >
+                    View Details
+                  </Link>
+                  <a
+                    href="https://wa.me/97450755702"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-[#0b0c10] text-white rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-gray-800 transition-all flex items-center gap-2"
+                  >
+                    <FaWhatsapp size={16} className="text-[#25D366]" /> Quote
+                  </a>
+                </div>
+              </div>
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-all text-lg font-bold"
+              >
+                &times;
+              </button>
+            </>
+          )}
         </Modal>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-14">
+          <p className="text-gray-500 mb-4 text-sm">Need a website or digital marketing?</p>
+          <a
+            href="https://wa.me/97450755702"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#8A1538] text-white px-8 py-3.5 rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-[#6b102b] hover:-translate-y-0.5 transition-all shadow-lg"
+          >
+            <FaWhatsapp size={18} className="text-[#25D366]" /> Get a Free Quote
+          </a>
+        </div>
       </div>
     </section>
   );

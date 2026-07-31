@@ -1,203 +1,118 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import {
-  FaArrowLeft,
-  FaArrowRight,
+  FaWarehouse,
+  FaHome,
+  FaUmbrella,
+  FaTree,
+  FaSun,
+  FaChair,
+  FaCampground,
+  FaCar,
+  FaTools,
+  FaRulerCombined,
+  FaShieldAlt,
+  FaHardHat,
   FaWhatsapp,
-  FaStar,
-  FaStarHalfAlt,
-  FaRegStar,
+  FaCheckCircle,
+  FaArrowRight,
 } from "react-icons/fa";
-
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
-import Slider from "react-slick";
-import Modal from "react-modal";
-
-// Modal accessibility root
-Modal.setAppElement("#root");
-
-const products = [
-  {
-    id: 1,
-    name: "Blackout Blinds",
-    subtitle: "Blocks 100% sunlight – perfect for bedrooms and media rooms.",
-    image: "https://8upload.com/image/685c9a9757638/IMG-20250625-WA0039.jpg",
-    link: "/curtains/blackout",
-    discount: true,
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    name: "Bedroom Blinds",
-    subtitle: "Soft blackout fabric with a cozy, relaxing aesthetic.",
-    image: "https://8upload.com/image/685c9a9817093/IMG-20250625-WA0047.jpg",
-    link: "/curtains/bedroom",
-    discount: false,
-    rating: 4.0,
-  },
-  {
-    id: 3,
-    name: "Window Blinds",
-    subtitle: "Modern blackout waves for clean, sleek interiors.",
-    image: "https://8upload.com/image/685c9a9765f0a/IMG-20250625-WA0040.jpg",
-    link: "/curtains/wave",
-    discount: true,
-    rating: 4.7,
-  },
-  {
-    id: 4,
-    name: "Office Blinds",
-    subtitle: "Elegant blackout solutions for privacy and ambiance.",
-    image: "https://8upload.com/image/685c9a97d9c22/IMG-20250625-WA0045.jpg",
-    link: "/curtains/livingroom",
-    discount: false,
-    rating: 4.3,
-  },
-];
-
-const NextArrow = ({ onClick }) => (
-  <div
-    onClick={onClick}
-    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 cursor-pointer"
-  >
-    <FaArrowRight className="text-gray-700" />
-  </div>
-);
-
-const PrevArrow = ({ onClick }) => (
-  <div
-    onClick={onClick}
-    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 cursor-pointer"
-  >
-    <FaArrowLeft className="text-gray-700" />
-  </div>
-);
-
-const renderStars = (rating) => {
-  const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
-  const empty = 5 - full - (half ? 1 : 0);
-
-  return (
-    <div className="flex gap-1 text-yellow-400 text-sm mt-2">
-      {[...Array(full)].map((_, i) => <FaStar key={`full-${i}`} />)}
-      {half && <FaStarHalfAlt />}
-      {[...Array(empty)].map((_, i) => <FaRegStar key={`empty-${i}`} />)}
-    </div>
-  );
-};
+import { NavLink } from "react-router-dom";
+import CustomerReviews from "./CustomerReviews";
+import PageTitle from "../reusable/PageTitle";
+import ParallaxSection from "../reusable/Parallax";
 
 const Tents_Outdoor_Works = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalImage, setModalImage] = useState("");
-
-  const openModal = (image) => {
-    setModalImage(image);
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalImage("");
-    setModalOpen(false);
-  };
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 3500,
-    speed: 1000,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 640, settings: { slidesToShow: 1 } },
-    ],
-  };
-
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-12 bg-gray-50">
-      <div className="max-w-screen-xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-4">
-          Our Blackout Curtain Collection
-        </h2>
-        <p className="text-center text-gray-600 mb-12 text-lg max-w-2xl mx-auto">
-          Designed for elegance and maximum light control – ideal for modern homes, offices, and hotel spaces.
-        </p>
+    <div className="font-sans text-gray-800 bg-white">
+      <PageTitle title="Tents & Outdoor Works | Ehan Tech Qatar" />
 
-        <Slider {...settings}>
-          {products.map((product) => (
-            <div key={product.id} className="px-4">
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:-translate-y-1 transition-transform duration-300 relative group">
-                {product.discount && (
-                  <span className="absolute top-4 left-4 bg-red-600 text-white text-xs px-3 py-1 rounded-full font-semibold z-10 shadow">
-                    -20% OFF
-                  </span>
-                )}
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  loading="lazy"
-                  onClick={() => openModal(product.image)}
-                  className="w-full h-56 object-cover cursor-pointer group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="p-6 flex flex-col h-56 justify-between">
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mt-2">{product.subtitle}</p>
-                    {renderStars(product.rating)}
-                  </div>
-                  <div className="flex justify-between items-center mt-4 gap-2">
-                    <Link
-                      to={product.link}
-                      className="px-5 py-2 text-sm rounded-full font-medium bg-blue-600 text-white hover:bg-blue-700 transition"
-                    >
-                      View Details
-                    </Link>
-                    <a
-                      href="https://wa.me/97470373588"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2 text-sm rounded-full font-medium bg-green-600 text-white hover:bg-green-700 transition"
-                    >
-                      <FaWhatsapp className="text-base" />
-                      WhatsApp
-                    </a>
-                  </div>
-                </div>
-              </div>
+      <ParallaxSection
+        imagePath="https://8upload.com/image/685c9a9746ecf/IMG-20250625-WA0038.jpg"
+        title="Tents & Outdoor Works Qatar"
+        subTitle="Premium Outdoor Solutions. Quality Craftsmanship. Delivered Across Qatar."
+      />
+
+      <section className="max-w-7xl mx-auto px-6 py-20 text-center">
+        <span className="text-[#8A1538] text-xs font-bold uppercase tracking-[0.25em]">Ehan Tech</span>
+        <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-4 mb-6 leading-tight">
+          Premium Tents & Outdoor <span className="text-[#8A1538]">Solutions in Qatar</span>
+        </h2>
+        <p className="text-gray-500 text-lg max-w-4xl mx-auto leading-relaxed">
+          Ehan Tech provides complete tents and outdoor structure solutions in Qatar. We specialize in majlis tents, event tents, warehouse tents, pergolas, parking shades, outdoor seating, and custom shade structures for residential, commercial, and event spaces.
+        </p>
+      </section>
+
+      <section className="bg-[#f9f5f0] py-16 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 text-center">
+          {[
+            { icon: <FaWarehouse size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Tent Making & Installation", desc: "Custom tent fabrication for events, weddings & commercial use." },
+            { icon: <FaHome size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Majlis Tents", desc: "Luxury Arabic majlis tents with AC, lighting & premium furnishings." },
+            { icon: <FaUmbrella size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Event Tents", desc: "Large-scale event tents for weddings, galas & exhibitions." },
+            { icon: <FaCampground size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Warehouse Tents", desc: "Heavy-duty industrial tents for storage & logistics." },
+            { icon: <FaCar size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Parking Shades", desc: "Durable car parking shade structures for villas & lots." },
+            { icon: <FaTree size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Pergola Installation", desc: "Custom wooden & aluminium pergolas with integrated lighting." },
+            { icon: <FaChair size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Outdoor Seating", desc: "Weather-resistant furniture for gardens & terraces." },
+            { icon: <FaSun size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Shade Sails & Canopies", desc: "Custom shade structures for schools, cafes & public spaces." },
+            { icon: <FaTools size={36} className="mx-auto mb-4 text-[#8A1538]" />, title: "Custom Structures", desc: "Bespoke outdoor structures made to your specifications." },
+          ].map(({ icon, title, desc }, i) => (
+            <div key={i} className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all border border-gray-100">
+              {icon}
+              <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+              <p className="text-gray-500 text-sm">{desc}</p>
             </div>
           ))}
-        </Slider>
+        </div>
+      </section>
 
-        <Modal
-          isOpen={modalOpen}
-          onRequestClose={closeModal}
-          overlayClassName="fixed inset-0 bg-black bg-opacity-70 z-50"
-          className="relative bg-white rounded-xl max-w-3xl mx-auto p-4 shadow-2xl flex items-center justify-center mt-10 outline-none"
-        >
-          <div className="relative w-full">
-            <button
-              onClick={closeModal}
-              className="absolute top-2 right-2 text-black bg-white rounded-full w-9 h-9 flex items-center justify-center text-lg font-bold shadow hover:bg-gray-200 transition"
-              aria-label="Close"
-            >
-              &times;
-            </button>
-            <img
-              src={modalImage}
-              alt="Curtain Preview"
-              className="w-full h-auto max-h-[80vh] object-contain rounded"
-            />
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-[#8A1538] text-xs font-bold uppercase tracking-[0.25em]">Our Services</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mt-4">Tents & Outdoor Services</h2>
           </div>
-        </Modal>
-      </div>
-    </section>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {["Tent Making & Installation","Majlis Tents","Event Tents","Warehouse Tents","Parking Shades","Pergola Installation","Outdoor Seating","Shade Sails","Canopy Structures","Garden Tents","Poolside Tents","Corporate Event Tents","Wedding Tents","Custom Tents","Tent Repair","Tent Maintenance","Shade Structure Repair","Outdoor Consultation"].map((s, i) => (
+              <div key={i} className="bg-[#f9f5f0] p-5 rounded-xl hover:shadow-md hover:-translate-y-0.5 transition-all border border-gray-100 flex items-center gap-3">
+                <FaCheckCircle className="text-[#8A1538] shrink-0" size={18} />
+                <span className="font-semibold text-gray-800 text-sm">{s}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CustomerReviews />
+
+      <section className="bg-[#f9f5f0] py-20 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <span className="text-[#8A1538] text-xs font-bold uppercase tracking-[0.25em]">Why Ehan Tech</span>
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mt-4 mb-6">Why Choose Ehan Tech?</h2>
+          <p className="text-gray-500 max-w-3xl mx-auto mb-10">Quality tent solutions, expert fabrication and professional installation.</p>
+          <div className="grid md:grid-cols-4 gap-6">
+            {[{title:"Free Site Inspection",desc:"No-cost assessment"},{title:"Custom Design",desc:"Bespoke solutions"},{title:"Quality Materials",desc:"Premium tent fabrics"},{title:"Professional Team",desc:"Skilled installers"},{title:"On-Time Delivery",desc:"On schedule"},{title:"Fair Pricing",desc:"No hidden costs"},{title:"After-Service",desc:"Warranty support"},{title:"Fully Insured",desc:"Full coverage"}].map((item, i) => (
+              <div key={i} className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                <FaHardHat className="text-[#8A1538] text-2xl mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-1">{item.title}</h3>
+                <p className="text-gray-500 text-xs">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-br from-[#8A1538] to-[#5a0e24] py-20 px-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Need Tents or Outdoor Structures in Qatar?</h2>
+        <p className="text-[#fbe29f] text-lg mb-8 max-w-xl mx-auto">Contact Ehan Tech for a free quote.</p>
+        <div className="flex gap-4 justify-center flex-wrap">
+          <a href="https://wa.me/97450755702" target="_blank" rel="noopener noreferrer" className="bg-white text-[#8A1538] px-8 py-4 rounded-xl font-bold uppercase text-sm tracking-wider hover:bg-[#fbe29f] transition-all shadow-xl flex items-center gap-2">
+            <FaWhatsapp size={20} className="text-[#25D366]" /> Get a Free Quote
+          </a>
+          <NavLink to="/contact" className="border-2 border-white text-white px-8 py-4 rounded-xl font-bold uppercase tracking-wider hover:bg-white hover:text-[#8A1538] transition-all">
+            Contact Us
+          </NavLink>
+        </div>
+        <p className="mt-6 text-gray-200 text-sm">Serving all of Qatar • MME Licensed • ISO Certified</p>
+      </section>
+    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { FaWhatsapp, FaQuestionCircle } from "react-icons/fa";
 
 const FaqsCard = ({ faq }) => {
   const answerElRef = useRef();
@@ -14,18 +15,21 @@ const FaqsCard = ({ faq }) => {
 
   return (
     <div
-      className="border-b border-gray-300 mb-4 overflow-hidden cursor-pointer"
+      className="border-b border-gray-200 mb-4 overflow-hidden cursor-pointer group"
       onClick={handleToggle}
     >
-      <h4 className="flex justify-between items-center text-lg font-semibold text-gray-800 py-4 hover:text-blue-600 transition-colors duration-300">
-        {faq.q}
-        <span className="ml-2">
+      <h4 className="flex justify-between items-center text-base sm:text-lg font-semibold text-gray-800 py-4 hover:text-[#8A1538] transition-colors duration-300">
+        <span className="flex items-center gap-2">
+          <FaQuestionCircle className="text-[#8A1538] text-sm shrink-0" />
+          {faq.q}
+        </span>
+        <span className="ml-2 shrink-0">
           {isOpen ? (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-[#8A1538]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
             </svg>
           ) : (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-gray-400 group-hover:text-[#8A1538]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
           )}
@@ -33,11 +37,11 @@ const FaqsCard = ({ faq }) => {
       </h4>
       <div
         ref={answerElRef}
-        className="transition-all duration-500 ease-in-out"
+        className="transition-all duration-500 ease-in-out overflow-hidden"
         style={isOpen ? { height: answerH } : { height: "0px" }}
       >
         <div>
-          <p className="text-gray-600 pb-4">{faq.a}</p>
+          <p className="text-gray-500 pb-4 text-sm sm:text-base leading-relaxed">{faq.a}</p>
         </div>
       </div>
     </div>
@@ -47,88 +51,94 @@ const FaqsCard = ({ faq }) => {
 const FAQSection = () => {
   const faqCategories = [
     {
-      category: "Curtains & Carpets",
+      category: "Civil Construction & Fit-Outs",
       faqs: [
-        { q: "Do you provide custom-made curtains?", a: "Yes, we offer tailor-made curtains based on your measurements, fabric selection, and desired design style." },
-        { q: "What types of carpets are available?", a: "We offer Persian, shaggy, wall-to-wall, office, prayer, and custom logo carpets." },
-        { q: "Is installation included for carpets and curtains?", a: "Yes, we offer free fitting and installation for most curtain and carpet orders within Qatar." }
+        { q: "What types of construction projects do you handle?", a: "Ehan Tech handles villas, offices, commercial buildings, renovations, tile & marble work, gypsum ceilings, partitions, and complete interior fit-outs across Qatar." },
+        { q: "Do you provide MME-approved contracting services?", a: "Yes, we are fully licensed by the Ministry of Municipality & Environment (MME) and Civil Defence certified for all contracting work." },
       ]
     },
     {
-      category: "UPVC & Vinyl Flooring",
+      category: "Aluminium & Glass Works",
       faqs: [
-        { q: "Is UPVC flooring water-resistant?", a: "Yes, UPVC flooring is highly water-resistant, making it ideal for kitchens, bathrooms, and commercial areas." },
-        { q: "Do you offer both supply and installation?", a: "Yes, our team handles full delivery and professional installation for all types of flooring solutions." }
+        { q: "Do you install aluminium doors and windows?", a: "Yes, we supply and install custom aluminium doors, windows, glass partitions, shower glass, mirrors, and curtain walls for residential and commercial properties." },
+        { q: "Can you do custom glass partitions for offices?", a: "Absolutely. We design and install framed and frameless glass partitions with various finishing options." },
       ]
     },
     {
-      category: "Sofas, Beds & Majlis",
+      category: "Tents, Pergolas & Outdoor",
       faqs: [
-        { q: "Can I customize the size and color of my sofa or majlis?", a: "Absolutely. You can choose fabric, color, foam type, and size to match your room style perfectly." },
-        { q: "Do you offer traditional Arabic majlis designs?", a: "Yes, we specialize in custom Arabic majlis with luxurious fabrics, embroidery, and premium foam." }
+        { q: "What types of tents do you supply?", a: "We supply party tents, Arabic majlis tents, heavy-duty outdoor tents, pergolas, car parking shades, and canopies built to withstand Qatar's climate." },
+        { q: "Can I get a custom-sized parking shade?", a: "Yes, we design and install custom parking shade solutions tailored to your space and requirements." },
       ]
     },
     {
-      category: "Office & Home Furniture",
+      category: "Furniture & Interior",
       faqs: [
-        { q: "What kind of office furniture do you provide?", a: "We provide desks, workstations, executive chairs, meeting tables, partitions, and storage units." },
-        { q: "Can I request space-saving furniture for small rooms?", a: "Yes, we design compact and multi-functional furniture for apartments and small spaces." }
+        { q: "Do you provide custom furniture?", a: "Yes, we offer tailor-made sofas, beds, wardrobes, majlis seating, office furniture, and home furniture with your choice of fabric, color, and size." },
+        { q: "Do you handle both home and office furniture?", a: "Yes, we provide complete furniture solutions for homes, villas, apartments, offices, and commercial spaces." },
       ]
     },
     {
-      category: "Tents, Cabinets & Outdoor Items",
+      category: "Cleaning & Maintenance",
       faqs: [
-        { q: "What types of tents do you supply?", a: "We supply party tents, majlis tents, and heavy-duty weatherproof outdoor tents." },
-        { q: "Do you make wooden and aluminum cabinets?", a: "Yes, we offer customized cabinets in wood, MDF, and aluminum for kitchens, offices, and wardrobes." }
+        { q: "What cleaning services do you offer?", a: "We offer housekeeping, office cleaning, deep cleaning, villa cleaning, AC maintenance, sanitization, water tank cleaning, and waste management across Qatar." },
+        { q: "Are your cleaning staff trained and insured?", a: "Yes, all our cleaning staff are professionally trained, vetted, and fully insured for your peace of mind." },
       ]
     },
     {
-      category: "Parking Shades & Canopies",
+      category: "Manpower Supply",
       faqs: [
-        { q: "Are your parking shades durable in harsh weather?", a: "Yes, we use UV-blocking HDPE/PVC fabrics and strong steel structures built to withstand Qatar's climate." },
-        { q: "Can I get a custom size or design for parking shades?", a: "Yes, we design and install parking solutions tailored to your space and aesthetic." }
+        { q: "What types of workers can you supply?", a: "We supply general laborers, skilled workers (carpenters, electricians, plumbers, painters, welders, masons), supervisors, foremen, and event crew." },
+        { q: "How quickly can you deploy workers?", a: "We can deploy general laborers within 24 hours and skilled workers within 48 hours depending on availability." },
       ]
     },
     {
-      category: "Customization & Design",
+      category: "Events & Exhibitions",
       faqs: [
-        { q: "Can I submit a photo or sketch for a custom order?", a: "Yes, you can send us references and our team will evaluate and replicate your desired design." },
-        { q: "Do you offer 3D design services?", a: "Yes, for large or premium orders, we offer 2D/3D design previews before production." }
+        { q: "Do you provide event setup services?", a: "Yes, we offer stage setup, exhibition booth design & fabrication, wedding decoration, lighting, sound systems, seating, and full event coordination." },
+        { q: "Can you build custom exhibition booths?", a: "Yes, we design and fabricate custom exhibition booths, kiosks, and display stands for trade shows and expos in Qatar." },
       ]
     },
     {
-      category: "Delivery & Installation",
+      category: "Digital Services",
       faqs: [
-        { q: "Do you deliver across Qatar?", a: "Yes, we deliver to all areas. Free delivery is available for large orders, while a small fee applies to smaller ones." },
-        { q: "Is fitting and installation included?", a: "Yes, most of our items come with free fitting and professional installation services." }
+        { q: "What digital services do you provide?", a: "We offer web development, graphic design, SEO, social media management, Google Ads, photography, videography, and branding solutions." },
+        { q: "Can you build an e-commerce website for my business?", a: "Yes, we develop custom e-commerce websites with payment gateway integration, product management, and SEO optimization." },
       ]
     },
     {
-      category: "Warranty, Maintenance & Support",
+      category: "Warranty & Support",
       faqs: [
-        { q: "Do your products come with warranty?", a: "Yes, our products come with warranties ranging from 1 to 5 years depending on the item." },
-        { q: "Do you offer post-installation maintenance?", a: "Yes, we provide repair and maintenance services on request, including sofa reupholstery and fixture adjustments." }
+        { q: "Do your products come with warranty?", a: "Yes, our products come with warranties ranging from 1 to 5 years depending on the type of work or product." },
+        { q: "Do you offer post-installation support?", a: "Yes, we provide maintenance, repair, and after-service support on request for all our projects." },
       ]
     },
     {
-      category: "Payment & Returns",
+      category: "Payment & Booking",
       faqs: [
-        { q: "What payment options do you support?", a: "We accept cash, card, bank transfer, and mobile payment apps such as QPay." },
-        { q: "Can I return or exchange items?", a: "Returns are accepted for unused, non-custom items within 7 days. Custom-made orders are non-returnable unless defective." }
+        { q: "What payment options do you accept?", a: "We accept cash, bank transfer, and card payments. Custom payment plans can be arranged for large projects." },
+        { q: "How can I book a service or consultation?", a: "You can contact us via WhatsApp at +974 5075 5702, email info.etcts@gmail.com, or use the contact form on our website." },
       ]
     }
   ];
 
   return (
-    <section className="max-w-screen-xl mx-auto px-4 md:px-8 py-16">
+    <section className="max-w-screen-xl mx-auto px-4 md:px-8 py-16 md:py-20">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800">Frequently Asked Questions</h1>
-        <p className="text-lg text-gray-600 mt-2">Get answers about our products, services, installation & policies.</p>
+        <span className="text-[#8A1538] text-xs font-bold uppercase tracking-[0.25em]">Ehan Tech</span>
+        <h1 className="text-3xl md:text-4xl font-black text-gray-900 mt-4 mb-3">
+          Frequently Asked <span className="text-[#8A1538]">Questions</span>
+        </h1>
+        <p className="text-gray-500 text-base max-w-2xl mx-auto">
+          Get answers about our construction, furniture, cleaning, manpower, events, and digital services across Qatar.
+        </p>
       </motion.div>
 
       {faqCategories.map((cat, index) => (
-        <div key={index} className="mb-14">
-          <h2 className="text-2xl font-semibold text-blue-700 mb-6 text-center">{cat.category}</h2>
+        <div key={index} className="mb-12 last:mb-0">
+          <h2 className="text-xl md:text-2xl font-bold text-[#8A1538] mb-6 text-center border-b border-gray-100 pb-3">
+            {cat.category}
+          </h2>
           <div className="max-w-3xl mx-auto">
             {cat.faqs.map((faq, i) => (
               <FaqsCard key={i} faq={faq} />
@@ -136,6 +146,19 @@ const FAQSection = () => {
           </div>
         </div>
       ))}
+
+      {/* Bottom CTA */}
+      <div className="text-center mt-14 pt-8 border-t border-gray-100">
+        <p className="text-gray-500 text-sm mb-4">Still have questions?</p>
+        <a
+          href="https://wa.me/97450755702"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-[#8A1538] text-white px-8 py-3.5 rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-[#6b102b] hover:-translate-y-0.5 transition-all shadow-lg"
+        >
+          <FaWhatsapp size={18} className="text-[#25D366]" /> Ask Us on WhatsApp
+        </a>
+      </div>
     </section>
   );
 };

@@ -6,14 +6,13 @@ import React from 'react';
 const ContactPage = () => {
     return (
         <div>
-         <PageTitle title="Contact Us | Curtains Furniture" />
+         <PageTitle title="Contact Us | Ehan Tech Construction & Trading Services" />
              <ParallaxSection
         imagePath="https://8upload.com/image/685f34413d745/Cuontact_Us_for_Curtains_Furniture_1.jpg"
         title=""
         subTitle=""
       />
       <Contact/>
-
         </div>
     );
 };
